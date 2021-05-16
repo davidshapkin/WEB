@@ -1,0 +1,9 @@
+div {
+    background-color: lightpink;
+    padding: 10px;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+}
