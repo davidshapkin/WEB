@@ -1,0 +1,17 @@
+@media print {
+	.print {
+		display: none;
+	}
+}
+
+.row>div {
+	text-align: center;
+}
+
+.row>div>p {
+	margin: 0;
+}
+
+.row>div:nth-child(2) {
+	background-color: lightgray;
+}
