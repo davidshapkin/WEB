@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.sky {
+    width: 100%;
+    height: 50vh;
+    background-color: rgba(11, 210, 227, 0.95);
+}
+
+.night {
+    width: 100%;
+    height: 50vh;
+    background-color: black;
+    transition: opacity;
+    animation: change_day 15s linear infinite alternate;
+    animation-direction: alternate;
+}
+
+.bird {
+    color: wheat;
+    width: 20%;
+    font-size: 45px;
+    position: absolute;
+    top: 5vh;
+    animation: bird_flight 10s linear infinite;
+    animation-play-state: paused;
+}
+
+.night-bird {
+	transition: opacity;
+    animation: night_bird 15s linear infinite alternate;
+    animation-direction: alternate;
+}
+
+@keyframes night_bird {
+	from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+
+@keyframes bird_flight {
+    from {
+      left: -20%;
+    }
+    to {
+      left: 120%;
+    }
+}
+
+@keyframes change_day {
+    from {
+        opacity: 0.0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.sea {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    animation: sea_night 15s linear infinite alternate;
+}
+
+.waves {
+    display: block;
+    width: 2000px;
+    color: white;
+    font-size: 64px;
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    animation: waves 5s ease-in infinite;
+    position: relative;
+    left: -10vh;
+}
+
+@keyframes waves {
+    from {
+        left: 0vh;
+    }
+    50% {
+        left: -10vw;
+    }
+    to {
+        left: 0vh;
+    }
+}
+
+@keyframes sea_night {
+    from {
+        background-color: #ef00ff;
+    }
+    to {
+        background-color: #6d008b;
+    }
+}
+
+.thermometer:hover {
+    background-color: red;
+}
+
+.thermometer {
+    position: absolute;
+    bottom: 1em;
+    left: 5em;
+    background-color: lightgray;
+    transition: background-color 2s linear;
+    width: 10vh;
+    box-shadow: -0.15vh -0.15vh 0.05px gray;
+}
+
+.mark {
+    margin: 0.5vh 1vh;
+}
+
+.mark_part {
+    margin: 0.5vh 3vh;
+}
+
+.run * {
+    animation-play-state: running;
+}
