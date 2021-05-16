@@ -149,3 +149,12 @@ footer {
 	margin: 5px 5%;
   }
   
+.logos:hover {
+	color: pink;
+}
+
+.pagination-button {
+	border-radius:50%;
+	width: 100px;
+	height: 100px;
+}
