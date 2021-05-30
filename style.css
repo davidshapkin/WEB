@@ -1,3 +1,31 @@
+.wrap {
+	flex-wrap: wrap;
+}
+
+.grow {
+	flex-grow: 5;
+}
+
+.basis {
+	flex-basis: 300px;
+}
+
+.shrink {
+	flex-shrink: 100px;
+}
+
+.order1 {
+	order: 1;
+}
+
+.order2 {
+	order: 2;
+}
+
+.order3 {
+	order: 3;
+}
+
 .item {
 	align-items: center;
 	justify-content: center;
