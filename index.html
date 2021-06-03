@@ -1,68 +1,59 @@
 <!DOCTYPE html>
-<html lang="ru">
-
+<html lang="ru" dir="ltr">
 <head>
-	<title>ЛР8 GRID Шапкин</title>
 	<link rel="stylesheet" href="style.css">
+	<meta charset="utf-8">
+	<title>ЛР8 FLEX Шапкин</title>
 </head>
-
 <body>
-	<h1>Grid</h1>
-	<div class="container">
+	<h1>Wrap Grow Basis Shrink Order</h1>
+	<div class="container wrap">
+		<div class="item">1</div>
+		<div class="item">2</div>	
+		<div class="item">3</div>
+		<div class="item">5</div>
+		<div class="item">6</div>
+		<div class="item basis">7 (basis)</div>
+		<div class="item">8</div>
+		<div class="item">9</div>
+		<div class="item">10</div>
+		<div class="item">11</div>
+		<div class="item">12</div>
+		<div class="item order3">13</div>
+		<div class="item order2">14</div>
+		<div class="item grow shrink order1">15 (grow,shrink)</div>
+	</div>
+	<h1>Margin</h1>
+	<div class="container right">
 		<div class="item">1</div>
 		<div class="item">2</div>
 		<div class="item">3</div>
-		<div class="item">4</div>
 	</div>
-	<br>
-	<div class="container">
+	<h1>Justify</h1>
+	<div class="container justify">
 		<div class="item">1</div>
 		<div class="item">2</div>
 		<div class="item">3</div>
 		<div class="item">4</div>
 		<div class="item">5</div>
-		<div class="item">6</div>
 	</div>
-	<br>
-	<div class="container named">
-		<div class="item fourth">1</div>
-		<div class="item third">2</div>
-		<div class="item second">3</div>
-		<div class="item first">4</div>
+	<h1>Reverse</h1>
+	<div class="container center reverse">
+		<div class="item">
+			<p>1</p>
+		</div>
+		<div class="item second">
+			<p>2</p>
+		</div>
+		<div class="item">
+			<p>3</p>
+		</div>
 	</div>
-
-	<h1>Positioning</h1>
-	<div class="container gap">
-		<div class="item item1">1</div>
-		<div class="item item2">2</div>
-		<div class="item item3">3</div>
-		<div class="item">4</div>
-	</div>
-
-	<h1>Gap</h1>
-	<div class="container gap">
+	<h1>Direction</h1>
+	<div class="container direction justify">
 		<div class="item">1</div>
 		<div class="item">2</div>
 		<div class="item">3</div>
-		<div class="item">4</div>
-	</div>
-
-
-	<h1>Other properties</h1>
-	<div class="other_container">
-		<div class="other_item light">
-			<p>1</p>
-		</div>
-		<div class="other_item">
-			<p>2</p>
-		</div>
-		<div class="other_item">
-			<p>3</p>
-		</div>
-		<div class="other_item light">
-			<p>4</p>
-		</div>
 	</div>
 </body>
-
 </html>
