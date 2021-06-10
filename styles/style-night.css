@@ -1,0 +1,64 @@
+.all-content-dark{
+    background-color: #000f47;
+    color: #fff;
+}
+.cards-dark__item{
+    box-shadow: inset 1px 1px 12px 1px #fff, 1px 1px 7px 1px #000f47;
+    background-color: #000f47;
+    border: solid 4px rgb(255, 255, 255);
+}
+.task-dark{
+    background-color: #000f47;
+    border: solid 4px #ffffff;
+}
+.add-task-dark__input{
+    border: solid 2px white;
+    background-color: #000f47;
+    margin: 2px;
+    padding-left: 10px;
+    color: rgb(244 148 255);
+}
+.add-task-dark__label{
+    color: white;
+}
+
+.add-task-dark__label > input{
+    color: white;
+}
+
+
+.task-dark__button:hover{
+    color: #021986;
+}
+.modal-container-dark__form{
+    background-color: #000f47;
+    border: solid 4px white;
+}
+.close-dark__button{
+    background-color: #02249f;
+    border: solid 4px #02249f;
+}
+.close-dark__button:hover{
+    background-color: #000f47;
+    border: solid 4px #000f47;
+    font-size: 36px;
+}
+.redact-dark__button{
+    background-color: #02249f;
+    border: solid 4px #02249f;
+}
+.redact-dark__button:hover{
+    border-radius: 20px;
+    font-size: 28px;
+    padding-bottom: 44px;
+    background-color: #000f47;
+    border: solid 4px #000f47;
+}
+.add-task-dark__button:hover {
+    background-color: #000f47;
+}
+.add-task-dark__button {
+    background-color: #011f9b;
+    
+}
+

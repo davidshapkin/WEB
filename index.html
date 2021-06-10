@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-night.css">
+    <link rel="stylesheet" href="font/circle/stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>ЛР12-14 Kanban Шапкин</title>
+</head>
+<body>
+   <div class="all-content":class="[darkTheme ? 'all-content-dark' : '']" id="board">
+    <div class="wrapper">
+        <transition name="fade">
+            <div class="modal-container" v-show="isShowTR">
+                <form class="modal-container__form" action="#" :class="[darkTheme ? 'modal-container-dark__form' : '']">
+                    <button type="submit" class="close__button" v-on:click="isShowTR=false" :class="[darkTheme ? 'close-dark__button' : '']">×</button>
+                    <label class="modal__text">
+                        Описание
+                        <input type="text" placeholder="Введите описание" class="modal__text" v-model="task_name_r">
+                    </label>
+                    <label class="modal__text">
+                        Статус
+                        <select name="" v-model="status_r" class="modal__text">
+                            <option selected disabled value="">Выберите статус</option>
+                            <option value="plan">План</option>
+                            <option value="begin">В процессе</option>
+                            <option value="end">Готово</option>
+                        </select>
+                    </label>
+                    <label class="modal__text">
+                        Ответственный:
+                        <input type="text" placeholder="Введите ФИО" class="modal-input-text" v-model="worker_r" :disabled="status_r=='1'">
+                    </label>
+                    <label class="modal__text">
+                        Начало:
+                        <input type="text" placeholder="Введите дату и время начала" class="modal-input-text" v-model="date_start_r" :disabled="status_r == '1'">
+                    </label>
+                    <label class="modal__text">
+                        Завершение:
+                        <input type="text" placeholder="Введите дату и время завершения" class="modal-input-text" v-model="date_end_r" :disabled="!(status_r == '3')">
+                    </label>
+                    <button type="submit" class="redact__button" v-on:click="redactTask" :class="[darkTheme ? 'redact-dark__button' : '']">➔</button>
+                </form>
+            </div>
+        </transition>
+        <header>
+            <div class="header">
+                <div class="header__text">Канбан</div>
+                <label class="slide">
+                    <input type="checkbox" v-model="darkTheme">
+                    <span class="slide-slider"></span>
+                 </label>
+            </div>
+        </header>
+        <main class="main">
+            <div class="add-task">
+                <label class="add-task__label" :class="[darkTheme ? 'add-task-dark__label' : '']">Добавить новую задачу
+                    <input type="text" placeholder="Описание" class="add-task__input" v-model="newTaskName" :class="[darkTheme ? 'add-task-dark__input' : '']"/>
+                    <input type="text" placeholder="ФИО" class="add-task__input" v-model="newWorker" :class="[darkTheme ? 'add-task-dark__input' : '']"/>
+                </label>
+                <button class="add-task__button" v-on:click="addTask"  :class="[darkTheme ? 'add-task-dark__button' : '']">
+                    <span></span>
+                </button>
+                <div class="add-task__text">{{messageError}}</div>
+            </div>
+            <br/>
+            <br/>
+            <div class="cards">
+                <div class="cards__item" @drop="onDrop($event,1)" @dragover.prevent @dragenter.prevent :class="[darkTheme ? 'cards-dark__item' : '']">
+                        <div class="cards__title">
+                        <h1>План({{counter}})</h1>
+                        </div>
+                        <div class="task"  v-for="task in tasksOpen" v-bind:key="task.name" draggable @dragstart="draggable($event, task)" :class="[darkTheme ? 'task-dark' : '']">
+                            <div class="cards__button" v-on:click="drop(task)"><button>X</button></div>
+                            <h3>Задача № {{task.task_id}}</h3>
+                            <p>{{task.name}}</p>
+                            <div class="task__wrap-img">
+                                <a class="task__button" v-on:click="decrementStatus(task)"  :class="[darkTheme ? 'task-dark__button' : '']">◀︎</a>
+                                <a class="task__button" v-on:click="incrementStatus(task)" :class="[darkTheme ? 'task-dark__button' : '']">▶︎</a>
+                                <a class="task__button" v-on:click="openTaskRedactor(task)" :class="[darkTheme ? 'task-dark__button' : '']">✎</a>
+							</div>
+                        </div>
+                </div>
+                <div class="cards__item" @drop="onDrop($event,2)" @dragover.prevent @dragenter.prevent :class="[darkTheme ? 'cards-dark__item' : '']">
+                        <div class="cards__title">
+                        <h1>В процессе({{begin}})</h1>
+                        </div>
+                        <div class="task"  v-for="task in tasksDoing" v-bind:key="task.name" draggable @dragstart="draggable($event, task)" :class="[darkTheme ? 'task-dark' : '']">
+                            <div class="cards__button" v-on:click="drop(task)"><button>X</button></div>
+                            <h3>Задача № {{task.task_id}}</h3>
+                            <p>{{task.name}}</p>
+                            <p>Ответственный: {{task.worker}}</p>
+                            <p>Начало:{{task.date_start}}</p>
+                                <div class="task__wrap-img">
+                                <a class="task__button" v-on:click="decrementStatus(task)":class="[darkTheme ? 'task-dark__button' : '']">◀︎</a>
+                                 <a class="task__button" v-on:click="incrementStatus(task)":class="[darkTheme ? 'task-dark__button' : '']">▶︎</a>
+                                 <a class="task__button" v-on:click="openTaskRedactor(task)":class="[darkTheme ? 'task-dark__button' : '']">✎</a>
+							</div>
+                        </div>
+                </div>
+                <div class="cards__item" @drop="onDrop($event,3)" @dragover.prevent @dragenter.prevent :class="[darkTheme ? 'cards-dark__item' : '']">
+                        <div class="cards__title">
+                        <h1>Готово({{end}})</h1>
+                        </div>
+                        <div class="task"  v-for="task in tasksClosed" v-bind:key="task.name" draggable @dragstart="draggable($event, task)" :class="[darkTheme ? 'task-dark' : '']">
+                            <div class="cards__button" v-on:click="drop(task)"><button>X</button></div>
+                            <h3>Задача № {{task.task_id}}</h3>
+                            <p>{{task.name}}</p>
+                            <p>Ответственный: {{task.worker}}</p>
+                            <p>Выполнена за: {{task.time_wasted}}</p>
+                            <p>Начало: {{task.date_start}}</p>
+                            <p>Конец: {{task.date_end}}</p>
+                            <div class="task__wrap-img">
+                                <a class="task__button" v-on:click="decrementStatus(task)":class="[darkTheme ? 'task-dark__button' : '']">◀︎</a>
+                                <a class="task__button" v-on:click="incrementStatus(task)":class="[darkTheme ? 'task-dark__button' : '']">▶︎</a>
+                                <a class="task__button" v-on:click="openTaskRedactor(task)":class="[darkTheme ? 'task-dark__button' : '']">✎</a>
+							</div>
+                        </div>
+                     </div>
+                 </div>
+             </main>
+        </div>
+    </div>
+    <script src="js/card.js"></script>
+</body>
+</html>
