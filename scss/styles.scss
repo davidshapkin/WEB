@@ -1,0 +1,103 @@
+@use "default_settings.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap'); //Пример использования импорта
+$dark_grey: #252B42; //Пример переменной
+$font-weights: ("light":100,
+"regular": 400,
+"bold": 700,
+"boldest": 900);
+$courier_font: 'Courier New',
+Courier,
+monospace;
+$montserrat: 'Montserrat',
+sans-serif;
+$font20: 20px;
+%cursiveGrayUnderline {
+    text-decoration: underline;
+    font-family: $courier_font;
+    color: $dark_grey;
+    font-style: italic;
+    font-size: $font20;
+}
+
+@mixin border_and_color ($color,
+$bgColor,
+$border_width) {
+    color: $color;
+    background-color: $bgColor;
+    border: $border_width solid $color;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: $courier_font;
+    color: $dark_grey;
+}
+
+.block1 {
+    font-size: $font20;
+    margin-top: 80px;
+    &>p {
+        //Стиль применяется только к элементу первого уровня
+        color: blue;
+    }
+    span {
+        //Пример использования вложенности
+        color: rgb(66, 15, 15);
+        text-decoration: underline;
+    }
+}
+
+.block2 {
+    @extend %cursiveGrayUnderline;
+    margin-top: 40px;
+    border: 1px solid black;
+}
+
+.block3 {
+    margin-top: 40px;
+    font-size: 30px;
+    font-family: $montserrat;
+    .li1 {
+        font-weight: map-get($font-weights, $key: "light");
+        @include border_and_color(darken(rgb(255, 251, 0), 20%),
+        rgb(25, 0, 255),
+        2px); //167
+    }
+    .li2 {
+        font-weight: map-get($font-weights, $key: "regular");
+        @include border_and_color(rgb(81, 255, 0),
+        rgb(255, 0, 255),
+        3px);
+    }
+    .li3 {
+        font-weight: map-get($font-weights, $key: "bold");
+        @include border_and_color(rgb(0, 0, 255),
+        rgb(255, 251, 0),
+        1px);
+    }
+    .li4 {
+        font-weight: map-get($font-weights, $key: "boldest");
+        @include border_and_color(rgb(255, 0, 0),
+        rgb(31, 255, 1),
+        1px);
+    }
+}
+
+.block4 {
+    margin-top: 40px;
+    font-size: $font20;
+    font-family: $montserrat;
+    &:hover {
+        font-size: $font20+5;
+    }
+}
+
+.block5 {
+    margin-top: 40px;
+    font-family: $montserrat;
+    p+p {
+        font-size: 24px;
+        font-weight: map-get($font-weights, $key: "bold");
+    }
+}

@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap");
+@use "default_settings.scss";
+.block2 {
+  text-decoration: underline;
+  font-family: "Courier New", Courier, monospace;
+  color: #252B42;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  color: #252B42;
+}
+
+.block1 {
+  font-size: 20px;
+  margin-top: 80px;
+}
+
+.block1 > p {
+  color: blue;
+}
+
+.block1 span {
+  color: #420f0f;
+  text-decoration: underline;
+}
+
+.block2 {
+  margin-top: 40px;
+  border: 1px solid black;
+}
+
+.block3 {
+  margin-top: 40px;
+  font-size: 30px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.block3 .li1 {
+  font-weight: 100;
+  color: #999700;
+  background-color: #1900ff;
+  border: 2px solid #999700;
+}
+
+.block3 .li2 {
+  font-weight: 400;
+  color: #51ff00;
+  background-color: magenta;
+  border: 3px solid #51ff00;
+}
+
+.block3 .li3 {
+  font-weight: 700;
+  color: blue;
+  background-color: #fffb00;
+  border: 1px solid blue;
+}
+
+.block3 .li4 {
+  font-weight: 900;
+  color: red;
+  background-color: #1fff01;
+  border: 1px solid red;
+}
+
+.block4 {
+  margin-top: 40px;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.block4:hover {
+  font-size: 25px;
+}
+
+.block5 {
+  margin-top: 40px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.block5 p + p {
+  font-size: 24px;
+  font-weight: 700;
+}
+/*# sourceMappingURL=styles.css.map */
